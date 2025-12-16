@@ -2,18 +2,34 @@ package main
 
 import (
 	"log"
+	"os"
 
-	"github.com/gin-gonic/gin"
 	"api-backend-saas/internal/database"
 	"api-backend-saas/internal/routes"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
+
+	env := os.Getenv("APP_ENV")
+	if env == "" {
+		env = "stage"
+	}
+
+	err := godotenv.Load(".env." + env)
+	if err != nil {
+		log.Println("⚠️ Nenhum arquivo .env encontrado, usando env do sistema")
+	}
+
 	database.Connect()
 
-	r := gin.Default()
-	routes.RegisterRoutes(r)
+	r := routes.SetupRouter()
 
-	log.Println("API running on :8080")
-	r.Run(":8080")
+	port := os.Getenv("SERVER_PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	r.Run(":" + port)
 }

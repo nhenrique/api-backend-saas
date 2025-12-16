@@ -4,7 +4,7 @@
 *.out
 
 # Env
-.env
+.env*
 
 # IDE
 .vscode/
