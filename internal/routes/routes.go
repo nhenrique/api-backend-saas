@@ -44,5 +44,11 @@ func SetupRouter() *gin.Engine {
 		userHandler.CreateUser,
 	)
 
+	api.GET(
+		"/users",
+		middlewares.RequirePermission("user:list"),
+		userHandler.ListUsers,
+	)
+
 	return r
 }

@@ -54,3 +54,24 @@ func (h *UserHandler) CreateUser(c *gin.Context) {
 		"email": user.Email,
 	})
 }
+
+func (h *UserHandler) ListUsers(c *gin.Context) {
+
+	companyID := c.GetUint("company_id")
+
+	var users []models.User
+
+	err := h.DB.
+		Where("company_id = ?", companyID).
+		Select("id, name, email, role_id, company_id, created_at").
+		Find(&users).Error
+
+	if err != nil {
+		c.JSON(500, gin.H{
+			"error": "erro ao buscar usuários",
+		})
+		return
+	}
+
+	c.JSON(200, users)
+}
