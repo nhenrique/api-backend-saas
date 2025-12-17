@@ -9,28 +9,22 @@ import (
 func RequirePermission(required string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		// =========================
-		// Busca permissões no contexto
-		// =========================
-		value, exists := c.Get("permissions")
-		if !exists || value == nil {
+		permsRaw, exists := c.Get("permissions")
+		if !exists {
 			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{
-				"error": "permissões não carregadas no contexto",
+				"error": "permissões não encontradas",
 			})
 			return
 		}
 
-		perms, ok := value.([]string)
+		perms, ok := permsRaw.([]string)
 		if !ok {
 			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{
-				"error": "formato inválido de permissões",
+				"error": "formato de permissão inválido",
 			})
 			return
 		}
 
-		// =========================
-		// Valida permissão exigida
-		// =========================
 		for _, p := range perms {
 			if p == required {
 				c.Next()
