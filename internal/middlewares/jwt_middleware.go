@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"api-backend-saas/internal/config"
+	"api-backend-saas/internal/database"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -12,8 +13,11 @@ import (
 
 func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		authHeader := c.GetHeader("Authorization")
 
+		// =========================
+		// Header Authorization
+		// =========================
+		authHeader := c.GetHeader("Authorization")
 		if authHeader == "" {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 				"error": "token não informado",
@@ -31,6 +35,9 @@ func JWTAuth() gin.HandlerFunc {
 
 		tokenStr := parts[1]
 
+		// =========================
+		// Parse JWT
+		// =========================
 		token, err := jwt.Parse(tokenStr, func(t *jwt.Token) (interface{}, error) {
 			if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, jwt.ErrSignatureInvalid
@@ -53,10 +60,41 @@ func JWTAuth() gin.HandlerFunc {
 			return
 		}
 
-		// 🔑 Injeta dados no contexto
-		c.Set("user_id", uint(claims["sub"].(float64)))
-		c.Set("role", claims["role"].(string))
-		c.Set("company_id", uint(claims["company_id"].(float64)))
+		// =========================
+		// Extrai dados do JWT
+		// =========================
+		userID := uint(claims["sub"].(float64))
+		role := claims["role"].(string)
+		companyID := uint(claims["company_id"].(float64))
+
+		// =========================
+		// Carrega permissões do banco
+		// =========================
+		var permissions []string
+
+		err = database.DB.
+			Table("permissions").
+			Select("permissions.name").
+			Joins("JOIN role_permissions rp ON rp.permission_id = permissions.id").
+			Joins("JOIN roles r ON r.id = rp.role_id").
+			Joins("JOIN users u ON u.role_id = r.id").
+			Where("u.id = ?", userID).
+			Scan(&permissions).Error
+
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+				"error": "erro ao carregar permissões",
+			})
+			return
+		}
+
+		// =========================
+		// Injeta no contexto
+		// =========================
+		c.Set("user_id", userID)
+		c.Set("role", role)
+		c.Set("company_id", companyID)
+		c.Set("permissions", permissions)
 
 		c.Next()
 	}

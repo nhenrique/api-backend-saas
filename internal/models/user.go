@@ -5,6 +5,7 @@ type User struct {
 	Name      string
 	Email     string `gorm:"uniqueIndex"`
 	Password  string
-	Role      string
 	CompanyID uint
+	RoleID    uint
+	Role      Role
 }

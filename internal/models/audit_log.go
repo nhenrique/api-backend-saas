@@ -1,13 +1,13 @@
 package models
 
-import "gorm.io/gorm"
+import "time"
 
 type AuditLog struct {
-	gorm.Model
-	CompanyID  uint
-	UserID     uint
-	Action     string
-	Resource   string
-	ResourceID string
-	IP         string
+	ID        uint `gorm:"primaryKey"`
+	UserID    uint
+	CompanyID uint
+	Action    string
+	Path      string
+	Method    string
+	CreatedAt time.Time
 }

@@ -12,42 +12,37 @@ import (
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
+	// ========================
+	// Handlers
+	// ========================
+	authService := &services.AuthService{DB: database.DB}
+	authHandler := handlers.NewAuthHandler(authService)
+	userHandler := handlers.NewUserHandler(database.DB)
+
+	// ========================
+	// Public routes
+	// ========================
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
 	})
 
-	// AUTH
-	authService := &services.AuthService{DB: database.DB}
-	r.POST("/login", handlers.Login(authService))
+	r.POST("/login", authHandler.Login)
 
-	// PROTECTED API
+	// ========================
+	// Protected routes
+	// ========================
 	api := r.Group("/api")
-	api.Use(middlewares.JWTAuth())
-
-	// Admin-only
-	api.GET("/admin/dashboard",
-		middlewares.RequireRoles("admin"),
-		func(c *gin.Context) {
-			c.JSON(200, gin.H{"message": "admin area"})
-		},
+	api.Use(
+		middlewares.JWTAuth(),
+		middlewares.EnforceTenant(),
+		middlewares.AuditLog(),
 	)
 
-	// Manager + Admin
-	api.GET("/reports",
-		middlewares.RequireRoles("admin", "gerente"),
-		func(c *gin.Context) {
-			c.JSON(200, gin.H{"message": "reports"})
-		},
+	api.POST(
+		"/users",
+		middlewares.RequirePermission("user:create"),
+		userHandler.CreateUser,
 	)
-
-	// Any authenticated user
-	api.GET("/me", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"user_id":    c.GetUint("user_id"),
-			"role":       c.GetString("role"),
-			"company_id": c.GetUint("company_id"),
-		})
-	})
 
 	return r
 }
