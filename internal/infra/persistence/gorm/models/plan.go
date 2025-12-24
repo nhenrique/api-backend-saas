@@ -1,9 +1,7 @@
 package models
 
-import "gorm.io/gorm"
-
 type Plan struct {
-	gorm.Model
+	BaseModel
 	Name      string
 	RateLimit int
 }

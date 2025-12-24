@@ -5,10 +5,12 @@ import (
 )
 
 type User struct {
-	ID        uuid.UUID `gorm:"type:uuid;primaryKey"`
+	BaseModel
 	Name      string
 	Email     string `gorm:"uniqueIndex"`
 	Password  string
 	CompanyID uuid.UUID
+	Company   Company
 	RoleID    uuid.UUID
+	Role      Role
 }

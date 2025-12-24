@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"github.com/nhenrique/api-backend-saas/internal/database"
-	"github.com/nhenrique/api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/infra/persistence/gorm/models"
 
 	"github.com/gin-gonic/gin"
 )

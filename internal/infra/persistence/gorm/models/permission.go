@@ -1,6 +1,6 @@
 package models
 
 type Permission struct {
-	ID   uint   `gorm:"primaryKey"`
+	BaseModel
 	Name string `gorm:"uniqueIndex"`
 }

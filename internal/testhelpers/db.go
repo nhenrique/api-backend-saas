@@ -1,7 +1,7 @@
 package testhelpers
 
 import (
-	"github.com/nhenrique/api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/infra/persistence/gorm/models"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"

@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 
-	"github.com/nhenrique/api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/infra/persistence/gorm/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

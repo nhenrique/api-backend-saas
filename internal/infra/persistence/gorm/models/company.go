@@ -1,10 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import "github.com/google/uuid"
 
 type Company struct {
-	gorm.Model
+	BaseModel
 	Name   string
-	PlanID uint
+	PlanID uuid.UUID
 	Plan   Plan
 }

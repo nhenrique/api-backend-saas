@@ -1,7 +1,7 @@
 package models
 
 type Role struct {
-	ID          uint         `gorm:"primaryKey"`
+	BaseModel
 	Name        string       `gorm:"uniqueIndex"`
 	Permissions []Permission `gorm:"many2many:role_permissions;"`
 }

@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/nhenrique/api-backend-saas/internal/config"
-	"github.com/nhenrique/api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/infra/persistence/gorm/models"
 	"github.com/nhenrique/api-backend-saas/internal/security"
 
 	"github.com/golang-jwt/jwt/v5"

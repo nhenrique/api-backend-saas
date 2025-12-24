@@ -6,8 +6,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/nhenrique/api-backend-saas/internal/infra/persistence/gorm/models"
 	"github.com/nhenrique/api-backend-saas/internal/middlewares"
-	"github.com/nhenrique/api-backend-saas/internal/models"
 	"github.com/nhenrique/api-backend-saas/internal/testhelpers"
 
 	"github.com/gin-gonic/gin"
