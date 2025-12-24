@@ -1,8 +1,8 @@
 package middlewares
 
 import (
-	"api-backend-saas/internal/database"
-	"api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/database"
+	"github.com/nhenrique/api-backend-saas/internal/models"
 
 	"github.com/gin-gonic/gin"
 )

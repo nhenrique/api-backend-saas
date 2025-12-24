@@ -1,8 +1,8 @@
 package testhelpers
 
 import (
-	"api-backend-saas/internal/models"
-	"api-backend-saas/internal/security"
+	"github.com/nhenrique/api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/security"
 
 	"gorm.io/gorm"
 )

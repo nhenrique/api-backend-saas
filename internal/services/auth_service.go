@@ -4,9 +4,9 @@ import (
 	"errors"
 	"time"
 
-	"api-backend-saas/internal/config"
-	"api-backend-saas/internal/models"
-	"api-backend-saas/internal/security"
+	"github.com/nhenrique/api-backend-saas/internal/config"
+	"github.com/nhenrique/api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/security"
 
 	"github.com/golang-jwt/jwt/v5"
 	"gorm.io/gorm"

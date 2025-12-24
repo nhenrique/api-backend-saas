@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"api-backend-saas/internal/services"
+	"github.com/nhenrique/api-backend-saas/internal/services"
 
 	"github.com/gin-gonic/gin"
 )

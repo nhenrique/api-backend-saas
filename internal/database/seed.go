@@ -1,8 +1,9 @@
 package database
 
 import (
-	"api-backend-saas/internal/models"
 	"log"
+
+	"github.com/nhenrique/api-backend-saas/internal/models"
 
 	"gorm.io/gorm"
 )

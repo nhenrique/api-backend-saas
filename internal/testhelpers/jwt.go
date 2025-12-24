@@ -3,7 +3,7 @@ package testhelpers
 import (
 	"time"
 
-	"api-backend-saas/internal/config"
+	"github.com/nhenrique/api-backend-saas/internal/config"
 
 	"github.com/golang-jwt/jwt/v5"
 )

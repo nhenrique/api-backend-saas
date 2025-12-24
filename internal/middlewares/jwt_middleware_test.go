@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"api-backend-saas/internal/testhelpers"
+	"github.com/nhenrique/api-backend-saas/internal/testhelpers"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"

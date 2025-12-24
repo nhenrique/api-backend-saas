@@ -1,10 +1,10 @@
 package routes
 
 import (
-	"api-backend-saas/internal/database"
-	"api-backend-saas/internal/handlers"
-	"api-backend-saas/internal/middlewares"
-	"api-backend-saas/internal/services"
+	"github.com/nhenrique/api-backend-saas/internal/database"
+	"github.com/nhenrique/api-backend-saas/internal/handlers"
+	"github.com/nhenrique/api-backend-saas/internal/middlewares"
+	"github.com/nhenrique/api-backend-saas/internal/services"
 
 	"github.com/gin-gonic/gin"
 )

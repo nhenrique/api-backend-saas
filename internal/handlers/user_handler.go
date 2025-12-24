@@ -3,8 +3,8 @@ package handlers
 import (
 	"net/http"
 
-	"api-backend-saas/internal/models"
-	"api-backend-saas/internal/security" // Certifique-se de ter esta função
+	"github.com/nhenrique/api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/security" // Certifique-se de ter esta função
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

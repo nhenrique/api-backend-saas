@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"api-backend-saas/internal/database"
-	"api-backend-saas/internal/routes"
+	"github.com/nhenrique/api-backend-saas/internal/database"
+	"github.com/nhenrique/api-backend-saas/internal/routes"
 
 	"github.com/joho/godotenv"
 )

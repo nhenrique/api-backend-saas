@@ -6,9 +6,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"api-backend-saas/internal/middlewares"
-	"api-backend-saas/internal/models"
-	"api-backend-saas/internal/testhelpers"
+	"github.com/nhenrique/api-backend-saas/internal/middlewares"
+	"github.com/nhenrique/api-backend-saas/internal/models"
+	"github.com/nhenrique/api-backend-saas/internal/testhelpers"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
