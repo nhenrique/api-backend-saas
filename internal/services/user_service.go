@@ -3,7 +3,6 @@ package services
 import (
 	"context"
 
-	"github.com/google/uuid"
 	userdomain "github.com/nhenrique/api-backend-saas/internal/domain/user"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -23,8 +22,8 @@ func (s *UserService) CreateUser(
 	name string,
 	email string,
 	password string,
-	companyID uuid.UUID,
-	roleID uuid.UUID,
+	companyID string,
+	roleID string,
 ) error {
 
 	hashed, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)

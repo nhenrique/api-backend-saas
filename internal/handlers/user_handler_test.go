@@ -6,6 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/google/uuid"
 	"github.com/nhenrique/api-backend-saas/internal/infra/persistence/gorm/models"
 	"github.com/nhenrique/api-backend-saas/internal/middlewares"
 	"github.com/nhenrique/api-backend-saas/internal/testhelpers"
@@ -84,8 +85,22 @@ func TestCreateUser_Success(t *testing.T) {
 	db := testhelpers.SetupTestDB()
 
 	// Seed mínimo necessário
-	db.Create(&models.Company{Name: "Empresa"})
-	db.Create(&models.Role{ID: 1, Name: "User"})
+	companyID := uuid.New()
+	roleID := uuid.New()
+
+	db.Create(&models.Company{
+		BaseModel: models.BaseModel{
+			ID: companyID,
+		},
+		Name: "Empresa",
+	})
+
+	db.Create(&models.Role{
+		BaseModel: models.BaseModel{
+			ID: roleID,
+		},
+		Name: "User",
+	})
 
 	handler := NewUserHandler(db)
 

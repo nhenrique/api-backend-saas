@@ -3,7 +3,7 @@ package user
 import (
 	"strings"
 
-	"github.com/nhenrique/api-backend-saas/internal/domain/id/id"
+	"github.com/nhenrique/api-backend-saas/internal/domain/id"
 )
 
 func NewUser(
