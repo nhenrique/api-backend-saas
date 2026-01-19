@@ -3,15 +3,15 @@ package user
 import (
 	"strings"
 
-	"github.com/google/uuid"
+	"github.com/nhenrique/api-backend-saas/internal/domain/id/id"
 )
 
 func NewUser(
 	name string,
 	email string,
 	hashedPassword string,
-	companyID uuid.UUID,
-	roleID uuid.UUID,
+	companyID string,
+	roleID string,
 ) (*User, error) {
 
 	if strings.TrimSpace(name) == "" {
@@ -26,16 +26,16 @@ func NewUser(
 		return nil, ErrInvalidPassword
 	}
 
-	if companyID == uuid.Nil {
+	if companyID == "" {
 		return nil, ErrInvalidCompany
 	}
 
-	if roleID == uuid.Nil {
+	if roleID == "" {
 		return nil, ErrInvalidRole
 	}
 
 	return &User{
-		ID:        uuid.New(),
+		ID:        id.New(),
 		Name:      name,
 		Email:     email,
 		Password:  hashedPassword,
